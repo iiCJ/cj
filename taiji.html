@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>太极</title>
+    <style>
+        body{
+            background: #e9e9e9;
+        }
+div{
+    width: 400px;
+    height: 400px;
+    margin: 100px auto;
+    border-radius: 50%;
+    background: linear-gradient(to bottom, #ffffff 0%,#ffffff 50%,#000 51%,#000 100%);
+    position: relative;
+    animation: animationFrames ease-in-out 5s;
+  animation-iteration-count: infinite;
+}
+div::before{
+    content: '';
+    width: 30px;
+    height: 30px;
+    border: 85px solid #000;
+    position: absolute;
+    top:100px;
+    background: #ffffff;
+    border-radius: 50%;
+}
+div::after{
+    content: '';
+    width: 30px;
+    height: 30px;
+    border: 85px solid #ffffff;
+    position: absolute;
+    top:100px;
+    right: 0;
+    background: #000;
+    border-radius: 50%;
+}
+@keyframes animationFrames{
+  0% {
+    transform:  rotate(0deg) ;
+  }
+  100% {
+    transform:  rotate(3600deg) ;
+  }
+}
+
+    </style>
+</head>
+<body>
+    <div>
+
+    </div>
+</body>
+</html>
