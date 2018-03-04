@@ -32,6 +32,7 @@ hr {
 ul {
     list-style: none;
     padding-right: 16px;
+    padding-top: 7px;
 }
 
 .navul>li {
