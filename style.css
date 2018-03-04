@@ -1,5 +1,5 @@
 body {
-    background: #000000;
+    background-color: #efefef;
     margin: 0;
 }
 
@@ -9,7 +9,7 @@ a {
 }
 
 main {
-    background-color: #efefef;
+    margin-top: -340px;
 }
 
 * {
@@ -29,7 +29,8 @@ hr {
     clear: both;
 }
 
-ul {
+ul,
+ol {
     list-style: none;
     padding-right: 16px;
     padding-top: 7px;
@@ -174,6 +175,173 @@ ul {
     border-radius: 50%;
     margin: 16px;
 }
-.uscard .media>a:hover{
+
+.uscard .media>a:hover {
     background-color: #c95254;
+}
+
+.download {
+    text-align: center;
+}
+
+.button {
+    font-size: 14px;
+    line-height: 16px;
+    padding: 21px 55px;
+    border: 1px solid #cdcfd1;
+    background: #efefef;
+    display: inline-block;
+    border-radius: 2px;
+    color: #3d4451;
+    font-weight: bold;
+    margin: 32px 0;
+    transition: box-shadow 0.2s;
+}
+
+.button:hover {
+    box-shadow: 0px 4px 13px 0px rgba(0, 0, 0, 0.2);
+}
+
+.jianjie {
+    max-width: 940px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-family: kai;
+    line-height: 1.8;
+    font-size: 18px;
+}
+
+.sectjn {
+    margin: 60px auto 0;
+    max-width: 940px;
+}
+
+.sectjn>h2 {
+    text-align: center;
+    color: #3d4451;
+    font-size: 34px;
+    line-height: 1.2;
+    font-weight: 600
+}
+
+.sectjn>ol {
+    background: white;
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.5);
+    padding: 42px 50px 10px;
+    margin-top: 30px;
+}
+
+.sectjn li {
+    float: left;
+    width: 48%;
+    box-sizing: border-box;
+}
+
+.sectjn>ol>li:nth-child(even) {
+    float: right;
+}
+
+.divs {
+    background-color: #e25d5f;
+}
+
+.divf {
+    background-color: #f9dcdd;
+}
+
+.sectjn>ol>li div {
+    height: 5px;
+    border-radius: 2px;
+    margin: 4px 0 40px;
+}
+
+.sectzpj {
+    margin: 60px auto 100px;
+    text-align: center;
+}
+
+.sectzpj h2 {
+    color: #3d4451;
+    font-size: 34px;
+    line-height: 1.2;
+    font-weight: 600;
+}
+
+.sectzpj nav {
+    margin-top: 32px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.sectzpj ol>li {
+    float: left;
+    cursor: pointer
+}
+
+.sectzpj ol> {
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.sectzpj ol>li:not(:first-child) {
+    margin-left: 40px;
+}
+
+.jobs {
+    max-width: 940px;
+    margin: 10px auto 100px;
+    position: relative;
+    height: 597px;
+}
+
+.big {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.small {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.smalla {
+    position: absolute;
+    top: 310px;
+    right: 0;
+}
+
+.diva,
+.divb {
+    height: 5px;
+    border-radius: 2px;
+}
+
+.diva {
+    margin-top: 5px;
+    margin-bottom: 28px;
+    background-color: #fff;
+}
+
+.divb {
+    background-color: #de5254;
+    transition: all 0.3s;
+}
+
+.one {
+    width: 35px;
+    margin-left: 0px;
+}
+
+.two {
+    width: 30px;
+    margin-left: 70px;
+}
+
+.three {
+    width: 113px;
+    margin-left: 140px;
 }
