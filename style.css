@@ -1,7 +1,10 @@
 body {
     background: #000000;
     margin: 0;
-    color: white;
+}
+
+.uscard {
+    border: 1px solid red;
 }
 
 a {
@@ -9,9 +12,19 @@ a {
     text-decoration: none;
 }
 
+main {
+    background-color: #efefef;
+}
+
 * {
     margin: 0;
     padding: 0;
+}
+
+hr {
+    border: none;
+    height: 0;
+    border-top: 1px solid #dedede;
 }
 
 .clearfix::after {
@@ -22,8 +35,7 @@ a {
 
 ul {
     list-style: none;
-    padding-top: 3px;
-    padding-bottom: 3px;
+    padding-right: 16px;
 }
 
 .navul>li {
@@ -33,18 +45,18 @@ ul {
     margin-left: 17px;
     margin-right: 17px;
     font-weight: bold;
-    border-top: 3px solid transparent;
-    border-bottom: 3px solid transparent;
 }
 
-.navul>li:hover {
+.navul>li>a:hover {
     border-bottom: 3px solid #dc6a67;
 }
 
 .navul>li>a {
-    padding-top: 3px;
-    padding-bottom: 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     display: block;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
 }
 
 .logo {
@@ -63,9 +75,108 @@ ul {
 
 .logo>.card {
     color: #9c9da3;
+    padding-left: 10px;
 }
 
 .topNavBar {
-    padding-top: 18px;
-    padding-bottom: 18px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.banner {
+    height: 515px;
+    background-image: url(./img/download.jpg);
+    background-position: center center;
+    background-size: cover;
+}
+
+.mask {
+    height: 515px;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.uscard {
+    max-width: 940px;
+    margin: 0 auto;
+    background-color: #FFF;
+}
+
+.welcome {
+    color: #FFF;
+    background-color: #e06c69;
+    padding: 4px 16px;
+    position: relative;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.sjx {
+    width: 0px;
+    border: 10px solid transparent;
+    border-top-width: 0px;
+    border-left-color: #e06c69;
+    position: absolute;
+    top: 100%;
+    left: 4px;
+}
+
+.picture {
+    float: left;
+}
+
+.text {
+    float: left;
+    margin-left: 65px;
+}
+
+.text hr {
+    margin: 20px 0px;
+}
+
+.pictureAndText {
+    padding: 50px;
+}
+
+.profile dl dt,
+.profile dl dd {
+    float: left;
+    padding: 5px 0;
+}
+
+.profile dl dt {
+    width: 30%;
+    font-weight: bold;
+}
+
+.profile dl dd {
+    width: 70%;
+    color: #9da0a7;
+}
+
+.uscard .media {
+    background-color: #e06c69;
+    text-align: center;
+}
+
+.uscard svg {
+    width: 30px;
+    height: 30px;
+    fill: #FFF;
+    vertical-align: top;
+}
+
+.uscard .media>a {
+    display: inline-block;
+    width: 40px;
+    line-height: 30px;
+    padding: 5px 0;
+    border-radius: 50%;
+    margin: 16px;
+}
+.uscard .media>a:hover{
+    background-color: #c95254;
 }
