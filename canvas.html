@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>canvas</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    #canvas {
+        background: white;
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    button{
+        padding: 3px 10px;
+        margin: 0px 10px;
+    }
+    .tools {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+    }
+    select{
+        padding: 3px 10px;
+        width: 50px;
+    }
+</style>
+
+<body>
+    <canvas id="canvas">
+    </canvas>
+    <div class="tools">
+            <input type="radio" id="huab" name="xpc" value="huab" checked>
+            <label for="xpca">画笔</label>
+            <input type="radio" id="xpca" name="xpc" value="xpca">
+            <label for="xpca">橡皮擦</label>
+            <button id="del">清空</button>
+            <label for="sel">画笔颜色：</label>
+            <select name="col" id="sel">
+                    <option value="black" selected>黑</option>
+                    <option value="red">红</option> 
+                    <option value="green">绿</option>
+            </select>
+            <button id="xz">下载</button>
+            <a id="dw" target="_blank" download="mycanvas"></a>
+        </div>
+    <script>
+        var uswidth = document.documentElement.clientWidth
+        var usheight = document.documentElement.clientHeight
+        var cvs = document.getElementById('canvas')
+        var ctx = cvs.getContext('2d')
+        var lineWidth = 5
+        var iswrite = false
+        var xpc = false
+        var colo='black'
+        var ox, oy, nx, ny
+        canvas.width = uswidth
+        canvas.height = usheight
+        huab.onchange=function(){
+            xpc=false
+        }
+        xpca.onchange=function(){
+            xpc=true
+        }
+        del.onclick=function(){
+            ctx.clearRect(0, 0, uswidth, usheight);
+        }
+        sel.onchange=function(eee){
+            colo=eee.target.value
+        }
+        xz.onclick=function(){
+            var url = cvs.toDataURL("image/png");
+            dw.href=url
+            dw.click()
+        }
+        canvas.onmousedown = function (aaa) {
+            ox = aaa.clientX
+            oy = aaa.clientY
+            iswrite = true
+            if (xpc) {
+                ctx.clearRect(ox, oy, 10, 10)
+            }
+        }
+        canvas.onmousemove = function (bbb) {
+            if (!iswrite) {
+                return
+            }
+            nx = bbb.clientX
+            ny = bbb.clientY
+            if (!xpc) {
+                ctx.beginPath();
+                ctx.moveTo(ox, oy)
+                ctx.lineWidth = lineWidth
+                ctx.lineTo(nx, ny)
+                ctx.strokeStyle=colo
+                ctx.stroke()
+                ctx.closePath()
+                ox = nx
+                oy = ny
+            } else {
+                ctx.clearRect(nx, ny, 10, 10)
+            }
+
+        }
+        canvas.onmouseup = function (ccc) {
+            iswrite = false
+        }
+    </script>
+</body>
+
+</html>
