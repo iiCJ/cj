@@ -13,11 +13,72 @@
       fill: currentColor;
       overflow: hidden;
     }
+
+    .mengb {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: #888;
+      z-index: 1;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+    }
+
+    .mengb.active {
+      display: flex;
+    }
+
+    .mengb {
+      display: none;
+    }
+
+    .loading {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
+
+    .loading::before,
+    .loading::after {
+      content: '';
+      background: black;
+      border-radius: 50%;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      animation: load 1.5s linear infinite;
+      position: absolute;
+    }
+
+    .loading::after {
+      animation: load 3s linear infinite;
+    }
+
+    @keyframes load {
+      0% {
+        width: 0px;
+        height: 0px;
+        opacity: 1;
+      }
+      100% {
+        width: 100px;
+        height: 100px;
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <div class="topNavBar clearfix">
+  <div id="siteWelcome" class="mengb active">
+    <div class="loading"></div>
+  </div>
+  <div id="topNavBar" class="topNavBar clearfix">
     <a class="logo" href="#" alt="logo" style="float: left; ">
       <span class="rs">RS</span>
       <span class="card">card</span>
@@ -28,13 +89,23 @@
           <a href="#">关于</a>
         </li>
         <li>
-          <a href="#">技能</a>
+          <a href="#jiiiiiine">技能</a>
         </li>
-        <li>
-          <a href="#">作品</a>
+        <li class="lsi">
+          <a href="#zpjjj">作品</a>
+          <ul class="submenu">
+              <li>作品1</li>
+              <li>作品2</li>
+              <li>作品3</li>
+            </ul>
         </li>
-        <li>
+        <li class="lsi">
           <a href="#">博客</a>
+          <ul class="submenu">
+              <li>博客1</li>
+              <li>博客2</li>
+              <li>博客3</li>
+            </ul>
         </li>
         <li>
           <a href="#">日历</a>
@@ -105,7 +176,7 @@
     </p>
 
   </main>
-  <section class="sectjn">
+  <section class="sectjn" id="jiiiiiine">
     <h2>技能</h2>
     <ol class="clearfix">
       <li>HTML 5 &amp; CSS 3
@@ -140,7 +211,7 @@
       </li>
     </ol>
   </section>
-  <section class="sectzpj">
+  <section class="sectzpj" id="zpjjj">
     <h2>作品集</h2>
     <nav>
       <ol class="clearfix">
@@ -149,28 +220,64 @@
         <li id="a3">原生JS&amp;CSS</li>
       </ol>
       <div class="diva">
-          <div id="divbar" class="divb one"></div>
-        </div>
+        <div id="divbar" class="divb one"></div>
+      </div>
     </nav>
 
     <div class="jobs">
-      <div class="big"><img src="./img/1.jpg" alt="作品1"></div>
-      <div class="small"><img src="./img/2.jpg" alt="作品2"></div>
-      <div class="smalla"><img src="./img/3.jpg" alt="作品3"></div>
+      <div class="big">
+        <img src="./img/1.jpg" alt="作品1">
+      </div>
+      <div class="small">
+        <img src="./img/2.jpg" alt="作品2">
+      </div>
+      <div class="smalla">
+        <img src="./img/3.jpg" alt="作品3">
+      </div>
     </div>
 
   </section>
-<script>
-a1.onclick=function(){
-  divbar.className='divb one'
-}
-a2.onclick=function(){
-  divbar.className='divb two'
-}
-a3.onclick=function(){
-  divbar.className='divb three'
-}
-</script>
+  <script>
+    setTimeout(function () {
+      siteWelcome.classList.remove('active')
+    }, 1000)
+    a1.onclick = function () {
+      divbar.className = 'divb one'
+    }
+    a2.onclick = function () {
+      divbar.className = 'divb two'
+    }
+    a3.onclick = function () {
+      divbar.className = 'divb three'
+    }
+    window.onscroll = function (xxx) {
+      if (window.scrollY > 0) {
+        topNavBar.classList.add('scroll')
+      } else {
+        topNavBar.classList.remove('scroll')
+      }
+    }
+    let litags = document.querySelectorAll('.navul>li')
+    for (let i = 0; i < litags.length; i++) {
+      litags[i].onmouseenter = function (x) {
+        x.currentTarget.classList.add('active')
+      }
+      litags[i].onmouseleave = function (x) {
+        x.currentTarget.classList.remove('active')
+      }
+    }
+    let aTags = document.querySelectorAll('.navul> li > a')
+    for (let i = 0; i < aTags.length; i++) {
+      aTags[i].onclick = function (x) {
+        x.preventDefault()
+        let a = x.currentTarget
+        let href = a.getAttribute('href') //'#siteAbout'
+        let element = document.querySelector(href)
+        let top = element.offsetTop
+        window.scrollTo(0, top - 80)
+      }
+    }
+  </script>
 </body>
 
 
