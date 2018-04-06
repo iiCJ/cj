@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+    <meta charset="UTF-8">
+    <title>无缝轮播</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .window {
+            width: 400px;
+            height: 300px;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+
+        .images {
+            position: relative;
+        }
+
+        img {
+            width: 100%;
+            transition: all .2s;
+            position: absolute;
+            top: 0;
+        }
+
+        .current {
+            left: 0;
+            transform: translateX(0);
+            z-index: 1;
+        }
+
+        .enter {
+            transform: translateX(100%);
+        }
+
+        .leave {
+            transform: translateX(-100%);
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="window">
+        <div class="images">
+            <img src="img/1.png" alt="图片1" width="400" height="300">
+            <img src="img/2.png" alt="图片2" width="400" height="300">
+            <img src="img/3.png" alt="图片3" width="400" height="300">
+            <img src="img/4.png" alt="图片4" width="400" height="300">
+            <img src="img/5.png" alt="图片5" width="400" height="300">
+        </div>
+    </div>
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script>
+        let n
+        csh()
+        setInterval(() => {
+            //n离开（离开后进入最右边），n+1进入主画面，然后现在的n+1后的n继续离开，后面n+1进去，取余数让length循环进入
+            makeLeave(getImage(n)).one('transitionend', (e) => {
+                makeEnter($(e.currentTarget))
+            })
+            n += 1
+            makeCurrent(getImage(n))
+        }, 500)
+
+        function getImage(n) {
+            return $(`img:nth-child(${x(n)})`)
+        }
+        var l=$('img').length
+        function x(n) {
+            if (n > l) {
+                n = n % l
+                if (n === 0) {
+                    n = l
+                }
+            }
+            return n
+        }
+
+        function csh() {
+            n=1
+            getImage(n).addClass('current').siblings().addClass('enter')
+        }
+
+        function makeCurrent($node) {
+            console.log($node[0].alt+'--进入')
+            return $node.removeClass('enter leave').addClass('current')
+        }
+
+        function makeLeave($node) {
+            console.log($node[0].alt+'-------离开')
+            return $node.removeClass('enter current').addClass('leave')
+        }
+
+        function makeEnter($node) {
+            console.log($node[0].alt+'待命')
+            return $node.removeClass('leave current').addClass('enter')
+        }
+    </script>
+</body>
+
+</html>
