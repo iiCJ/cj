@@ -7,9 +7,10 @@
     <title>轮播</title>
     <style>
         #window {
-            width: 300px;
+            width: 835px;
             overflow: hidden;
             margin: 20px auto;
+            position: relative;
         }
 
         #images {
@@ -18,37 +19,69 @@
             transition: all 0.5s;
         }
 
-        .red {
-            color: red;
+        .active {
+            position: relative;
+        }
+
+        .active::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 15px;
+            height: 15px;
+            border-radius: 15px;
+            background-color: white;
+        }
+
+        #body {
+            background-color: #f0f0f0;
+        }
+
+        #buttons {
+            display: inline-block;
+            position: absolute;
+            bottom: 0;
+            left: 38%;
+        }
+
+        #buttons div {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            margin-left: 15px;
+            background-color: #888;
+            border-radius: 15px;
         }
     </style>
 </head>
 
 <body>
-    <div id=window>
-        <div id=images>
-            <img src="https://fthmb.tqn.com/0ui_Zw01Ht9NHJkSBlqOIC1IH44=/960x0/filters:no_upscale()/yorkshire-terrier-583788122-581630e85f9b581c0b018a00.jpg"
-                width=300 alt="图片1" height=200>
-            <img src="https://canna-pet.com/wp-content/uploads/2017/06/20-longest-living-dog-breeds_canna-pet-e1498599846169.jpg" width=300
-                alt="" height=200>
-            <img src="https://fthmb.tqn.com/0ui_Zw01Ht9NHJkSBlqOIC1IH44=/960x0/filters:no_upscale()/yorkshire-terrier-583788122-581630e85f9b581c0b018a00.jpg"
-                width=300 alt="" height=200>
-            <img src="https://canna-pet.com/wp-content/uploads/2017/06/20-longest-living-dog-breeds_canna-pet-e1498599846169.jpg" width=300
-                alt="" height=200>
+    <div id=body>
+        <div id=window>
+            <div id=images>
+                <img src="img/iphone-x-gallery1-2017.jpg" width=835 alt="图片1" height=641>
+                <img src="img/iphone-x-gallery2-2017.jpg" width=835 alt="图片2" height=641>
+                <img src="img/iphone-x-gallery3-2017.jpg" width=835 alt="图片3" height=641>
+                <img src="img/iphone-x-gallery4-2017.jpg" width=835 alt="图片4" height=641>
+                <img src="img/iphone-x-gallery5-2017.jpg" width=835 alt="图片5" height=641>
+            </div>
+            <div id=buttons>
+                <div class=active></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
     </div>
-    <span id=buttons>
-        <span class=red>第1张</span>
-        <span>第2张</span>
-        <span>第3张</span>
-        <span>第4张</span>
-    </span>
+
     <script>
-        var buttons = $('#buttons>span')
+        var buttons = $('#buttons>div')
         for (let i = 0; i < buttons.length; i++) {
             $(buttons[i]).on('click', function (a) {
                 var index = $(a.currentTarget).index()
-                var p = index * -300
+                var p = index * -835
                 $('#images').css({
                     transform: 'translate(' + p + 'px)'
                 })
@@ -60,7 +93,7 @@
         var timeId = setTimer()
 
         function activeButton($button) {
-            $button.addClass('red').siblings('.red').removeClass('red')
+            $button.addClass('active').siblings('.active').removeClass('active')
         }
 
         var n = 0
