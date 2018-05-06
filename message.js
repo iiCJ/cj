@@ -53,7 +53,7 @@
         let li = document.createElement('li')
         li.innerText = `${object.attributes.name}:${object.attributes.content}`
         let messageList = document.querySelector('#messageList')
-        messageList.appendChild(li)
+        this.messageList.appendChild(li)
         myForm.querySelector('input[name=content]').value = ''
       })
     }
