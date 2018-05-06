@@ -218,7 +218,7 @@ ol {
     max-width: 940px;
 }
 
-.sectjn>h2 {
+.sectjn>h2,.message>h2 {
     text-align: center;
     color: #3d4451;
     font-size: 34px;
@@ -402,4 +402,13 @@ ol {
   .navul .submenu > li{
     white-space: nowrap;
     padding: 5px 10px;
+  }
+  section.message > ol{
+    max-width: 700px;
+    margin: 0 auto;
+    border-top: 1px solid #DDD;
+  }
+  section.message > ol > li {
+    padding: 16px;
+    border-bottom: 1px solid #DDD;
   }

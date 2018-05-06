@@ -1,6 +1,6 @@
 setTimeout(function () {
     siteWelcome.classList.remove('active')
-  }, 1000)
+  }, 1)
   a1.onclick = function () {
     divbar.className = 'divb one'
   }
