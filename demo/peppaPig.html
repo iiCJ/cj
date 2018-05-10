@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>画一只皮卡丘给你看</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <style id="styleTag">
+  </style>
+  <style>
+    *{margin: 0; padding: 0; box-sizing: border-box;}
+*::after{
+  box-sizing: border-box;
+}
+*::before{
+  box-sizing: border-box;
+}
+*{
+  transition: all 0.3s;
+}
+body{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.code-wrapper{
+  flex:1;
+  height: 50%;
+  padding: 10px;
+}
+.preview-wrapper{
+  flex: 1;
+  height: 50%;
+}
+#code{
+  overflow: hidden;
+  height: 100%;
+}
+.actions{
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+}
+.actions>button{
+  margin: 10px;
+  background: #ddd;
+  padding: 8px 10px;
+  border: none;
+}
+.actions>button.active{
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.8);
+}
+.actions>button:focus{
+  outline: none;
+}
+.wrapper{
+  width: 100%;
+  height: 165px;
+  position: relative;
+}
+.preview{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
+</head>
+<body>
+  <div class="code-wrapper">
+    <pre id="code"></pre>
+  </div>
+  <div class="preview-wrapper">
+    <div class="preview">
+        <div class='peppa'>
+            <div class='ear-right'></div>
+            <div class='ear-left'></div>
+            <div class='head'>
+              <div class='eye-left'>
+                <div class='eye-ball'></div>
+              </div>
+              <div class='eye-right'>
+                <div class='eye-ball'></div>
+              </div>
+              <div class='smile'></div>
+              <div class='patcher'></div>
+              <div class='cheek'></div>
+            </div>
+            <div class='face'>
+              <div class='nostril-right'></div>
+              <div class='nostril-left'></div>
+            </div>
+            <div class='hand-right'></div>
+            <div class='hand-left'></div>
+            <div class='dress'></div>
+            <div class='leg-right'></div>
+            <div class='leg-left'></div>
+            <div class='shoe-right'></div>
+            <div class='shoe-left'></div>
+          </div>
+    </div>
+  </div>
+  <div class="actions">
+    <button data-speed="slow">慢速</button>
+    <button data-speed="normal" class="active">中速</button>
+    <button data-speed="fast">快速</button>
+  </div>
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+  !function(){
+  var duration = 50
+  $('.actions').on('click', 'button', function(e){
+    let $button = $(e.currentTarget) // button
+    let speed = $button.attr('data-speed')
+    $button.addClass('active')
+      .siblings('.active').removeClass('active')
+    switch(speed){
+      case 'slow':
+        duration = 100
+        break
+      case 'normal':
+        duration = 50
+        break
+      case 'fast':
+        duration = 1
+        break
+    }
+  })
+  function writeCode(prefix, code, fn){
+    let container = document.querySelector('#code')
+    let styleTag = document.querySelector('#styleTag')
+    let n = 0
+    let id
+    id = setTimeout(function run(){
+      n+=1
+      container.innerHTML = code.substring(0,n)
+      styleTag.innerHTML = code.substring(0,n)
+      container.scrollTop = container.scrollHeight
+      if(n < code.length){
+        id = setTimeout(run, duration)
+      }else{
+        fn && fn.call()
+      }
+    }, duration)
+  }
+  let code = `
+  body {
+  background: #84CEF5;
+}
+
+.peppa {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 400px;
+  width: 200px;
+  transform: translate(-50%, -50%);
+}
+
+.head {
+  position: relative;
+  width: 225px;
+  height: 220px;
+  background-color: #f8c6e0;
+  border: 8px solid #f5a8cb;
+  border-right: 8px solid #f5a8cb;
+  border-top: 8px solid #f5a8cb;
+  border-radius: 200px;
+  z-index: 2;
+}
+
+.ear, .ear-right, .ear-left {
+  z-index: -2;
+  position: absolute;
+  width: 34px;
+  height: 50px;
+  border: 8px solid #f5a8cb;
+  background-color: #f8c6e0;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+}
+
+.ear-right {
+  top: -58px;
+  right: 40px;
+  transform: rotate(16deg);
+}
+
+.ear-left {
+  right: -25px;
+  top: -32px;
+  transform: rotate(34deg);
+}
+
+.eye, .eye-right, .eye-left {
+  z-index: 10;
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  background-color: white;
+  border-radius: 100%;
+  border: 6px solid #f5a8cb;
+}
+
+.eye-ball {
+  position: absolute;
+  top: 38%;
+  left: 30%;
+  width: 15px;
+  height: 15px;
+  background-color: black;
+  border-radius: 100%;
+  transform: translate(-50%, -50%);
+}
+
+.eye-right {
+  top: -10px;
+  left: 30px;
+}
+
+.eye-left {
+  top: 12px;
+  left: 78px;
+}
+
+.patcher {
+  background-color: #f8c6e0;
+  margin-top: -12px;
+  margin-left: 5px;
+  width: 120px;
+  height: 100px;
+  transform: rotate(12deg);
+}
+
+.face {
+  position: absolute;
+  top: -22px;
+  height: 110px;
+  width: 200px;
+  background-color: #f8c6e0;
+  border: 8px solid #f5a8cb;
+  border-radius: 50%  0%  0%  50%  / 30%  0%  0%  60%;
+  transform: rotate(14deg);
+  right: 60px;
+}
+
+.face:before {
+  content: '';
+  top: 2px;
+  left: -12px;
+  width: 54px;
+  height: 68px;
+  position: absolute;
+  background: #f8c6e0;
+  border: 8px solid #f5a8cb;
+  transform: rotate(10deg);
+  border-radius: 70%  50%  50%  60%  / 60%   60%   60%  60%;
+}
+
+.nostril, .nostril-right, .nostril-left {
+  height: 12px;
+  width: 12px;
+  border-radius: 6px;
+  background-color: #bc709b;
+}
+
+.nostril-right {
+  position: absolute;
+  top: 38px;
+  left: 6px;
+}
+
+.nostril-left {
+  position: absolute;
+  top: 36px;
+  left: 24px;
+}
+
+.smile {
+  width: 90px;
+  height: 26px;
+  background-color: transparent;
+  position: absolute;
+  bottom: 50px;
+  left: 20px;
+  border-radius: 0px 0px 80px 80px;
+  border-bottom: 12px solid #e94e90;
+  border-top: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-left: 8px solid transparent;
+  transform: rotate(22deg);
+}
+
+.cheek {
+  width: 60px;
+  height: 70px;
+  border-radius: 30px;
+  background-color: #f5a8cb;
+  position: absolute;
+  top: 58px;
+  right: 24px;
+}
+
+.dress {
+  margin-top: -60px;
+  margin-left: -20px;
+  width: 160px;
+  height: 220px;
+  background-color: #ea655d;
+  border-left: 12px solid #e63b29;
+  border-bottom: 12px solid #e63b29;
+  border-top: 12px solid #e63b29;
+  border-top-left-radius: 190px;
+  border-bottom-left-radius: 16px;
+  border-top-right-radius: 0px;
+}
+
+.dress:after {
+  content: '';
+  margin-top: -12px;
+  margin-left: 14px;
+  height: 220px;
+  position: absolute;
+  width: 160px;
+  background-color: #ea655d;
+  left: 40px;
+  border-right: 12px solid #e63b29;
+  border-bottom: 12px solid #e63b29;
+  border-top: 12px solid #e63b29;
+  border-top-right-radius: 390px;
+  border-bottom-right-radius: 16px;
+  border-top-left-radius: 0px;
+}
+
+.hand, .hand-right, .hand-left {
+  background-color: #f8c6e0;
+}
+
+.hand-right {
+  width: 120px;
+  height: 14px;
+  margin-top: 50px;
+  margin-left: -80px;
+  position: absolute;
+  z-index: -1;
+  transform: rotate(-30deg);
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.hand-right:before {
+  content: '';
+  width: 25px;
+  height: 10px;
+  background-color: #f8c6e0;
+  position: absolute;
+  transform: rotate(45deg);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  top: -10px;
+  left: 5px;
+}
+
+.hand-right:after {
+  content: '';
+  width: 25px;
+  height: 10px;
+  background-color: #f8c6e0;
+  position: absolute;
+  transform: rotate(-45deg);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  top: 15px;
+  left: 7px;
+}
+
+.hand-left {
+  width: 90px;
+  height: 12px;
+  margin-top: 56px;
+  margin-left: 200px;
+  position: absolute;
+  transform: rotate(30deg);
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.hand-left:before {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 10px;
+  background-color: #f8c6e0;
+  transform: rotate(-50deg);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  top: -10px;
+  left: 53px;
+}
+
+.hand-left:after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 10px;
+  background-color: #f8c6e0;
+  transform: rotate(54deg);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  top: 14px;
+  left: 50px;
+}
+
+.leg, .leg-right, .leg-left {
+  height: 60px;
+  width: 14px;
+  background-color: #f8c6e0;
+}
+
+.leg-right {
+  margin-left: 50px;
+}
+
+.leg-left {
+  margin-top: -60px;
+  margin-left: 140px;
+}
+
+.shoe, .shoe-right, .shoe-left {
+  width: 60px;
+  height: 20px;
+  background-color: black;
+  border-radius: 30px 20px 20px 30px;
+}
+
+.shoe-right {
+  margin-left: 4px;
+}
+
+.shoe-left {
+  margin-left: 100px;
+  margin-top: -20px;
+}
+`
+  writeCode('',code)
+
+}.call()
+  </script>
+</body>
+</html>
